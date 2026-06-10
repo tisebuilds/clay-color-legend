@@ -27,6 +27,7 @@ export const INTERACTION_VARIANTS: InteractionVariant[] = [
     id: "2",
     label: "Variant 2",
     name: "Rename modal",
+    preferred: true,
     description: "Color menu + rename colors dialog",
     ColumnHeaderColorPicker: Variant2ColumnHeaderColorPicker,
     ColumnsPanelColorPicker: Variant2ColumnsPanelColorPicker,

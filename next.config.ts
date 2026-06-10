@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  turbopack: {
+    // Home dir has a stray package-lock.json; pin root to this project.
+    root: process.cwd(),
+  },
 };
 
 export default nextConfig;

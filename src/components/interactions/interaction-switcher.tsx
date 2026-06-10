@@ -1,5 +1,6 @@
 "use client";
 
+import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useInteractionVariant } from "./interaction-context";
 import type { InteractionVariantId } from "./types";
@@ -36,7 +37,18 @@ export function InteractionSwitcher() {
                 >
                   {v.id}
                 </span>
-                <span className="truncate font-normal">{v.name}</span>
+                <span className="flex min-w-0 items-center gap-1 truncate font-normal">
+                  {v.name}
+                  {v.preferred ? (
+                    <Star
+                      className={cn(
+                        "size-3 shrink-0 fill-current",
+                        isSelected ? "text-amber-200" : "text-amber-500"
+                      )}
+                      aria-label="Preferred direction"
+                    />
+                  ) : null}
+                </span>
               </button>
             </li>
           );

@@ -23,6 +23,7 @@ export type InteractionVariant = {
   label: string;
   name: string;
   description: string;
+  preferred?: boolean;
   ColumnHeaderColorPicker: ComponentType<ColumnHeaderColorPickerProps>;
   ColumnsPanelColorPicker: ComponentType<ColumnsPanelColorPickerProps>;
 };
