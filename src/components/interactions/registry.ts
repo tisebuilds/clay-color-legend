@@ -1,13 +1,18 @@
-import { createPlaceholderVariant } from "./variant-placeholder";
 import { Variant1ColumnHeaderColorPicker } from "./variants/variant-1/column-header-color-picker";
 import { Variant1ColumnsPanelColorPicker } from "./variants/variant-1/columns-panel-color-picker";
 import { Variant2ColumnHeaderColorPicker } from "./variants/variant-2/column-header-color-picker";
 import { Variant2ColumnsPanelColorPicker } from "./variants/variant-2/columns-panel-color-picker";
 import { Variant3ColumnHeaderColorPicker } from "./variants/variant-3/column-header-color-picker";
 import { Variant3ColumnsPanelColorPicker } from "./variants/variant-3/columns-panel-color-picker";
+import { Variant4ColumnHeaderColorPicker } from "./variants/variant-4/column-header-color-picker";
+import { Variant4ColumnsPanelColorPicker } from "./variants/variant-4/columns-panel-color-picker";
+import { Variant5ColumnHeaderColorPicker } from "./variants/variant-5/column-header-color-picker";
+import { Variant5ColumnsPanelColorPicker } from "./variants/variant-5/columns-panel-color-picker";
+import { Variant6ColumnHeaderColorPicker } from "./variants/variant-6/column-header-color-picker";
+import { Variant6ColumnsPanelColorPicker } from "./variants/variant-6/columns-panel-color-picker";
+import { Variant7ColumnHeaderColorPicker } from "./variants/variant-7/column-header-color-picker";
+import { Variant7ColumnsPanelColorPicker } from "./variants/variant-7/columns-panel-color-picker";
 import type { InteractionVariant, InteractionVariantId } from "./types";
-
-const PLACEHOLDER_DESCRIPTION = "Interaction pattern TBD";
 
 export const INTERACTION_VARIANTS: InteractionVariant[] = [
   {
@@ -37,30 +42,34 @@ export const INTERACTION_VARIANTS: InteractionVariant[] = [
   {
     id: "4",
     label: "Variant 4",
-    name: "TBD",
-    description: PLACEHOLDER_DESCRIPTION,
-    ...createPlaceholderVariant("4", "Variant 4"),
+    name: "Add label",
+    description: "Swatch grid + create label modal",
+    ColumnHeaderColorPicker: Variant4ColumnHeaderColorPicker,
+    ColumnsPanelColorPicker: Variant4ColumnsPanelColorPicker,
   },
   {
     id: "5",
     label: "Variant 5",
-    name: "TBD",
-    description: PLACEHOLDER_DESCRIPTION,
-    ...createPlaceholderVariant("5", "Variant 5"),
+    name: "Edit theme",
+    description: "Default theme grid + edit/new theme modals",
+    ColumnHeaderColorPicker: Variant5ColumnHeaderColorPicker,
+    ColumnsPanelColorPicker: Variant5ColumnsPanelColorPicker,
   },
   {
     id: "6",
     label: "Variant 6",
-    name: "TBD",
-    description: PLACEHOLDER_DESCRIPTION,
-    ...createPlaceholderVariant("6", "Variant 6"),
+    name: "Inline rename",
+    description: "Color menu with inline rename mode",
+    ColumnHeaderColorPicker: Variant6ColumnHeaderColorPicker,
+    ColumnsPanelColorPicker: Variant6ColumnsPanelColorPicker,
   },
   {
     id: "7",
     label: "Variant 7",
-    name: "TBD",
-    description: PLACEHOLDER_DESCRIPTION,
-    ...createPlaceholderVariant("7", "Variant 7"),
+    name: "Per-color rename",
+    description: "Color submenu with apply/rename actions",
+    ColumnHeaderColorPicker: Variant7ColumnHeaderColorPicker,
+    ColumnsPanelColorPicker: Variant7ColumnsPanelColorPicker,
   },
 ];
 

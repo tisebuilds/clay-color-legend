@@ -4,12 +4,16 @@ import { Bell, ChevronRight, HelpCircle } from "lucide-react";
 import { ClayTable } from "@/components/clay-table";
 import { InteractionProvider } from "@/components/interactions/interaction-context";
 import { Variant3ThemeProvider } from "@/components/interactions/variants/variant-3/theme-context";
+import { Variant4LabelProvider } from "@/components/interactions/variants/variant-4/label-context";
+import { Variant5ThemeProvider } from "@/components/interactions/variants/variant-5/theme-context";
 import { PrototypeSidebar } from "@/components/prototype-sidebar";
 
 export function ClayShell() {
   return (
     <InteractionProvider>
       <Variant3ThemeProvider>
+        <Variant4LabelProvider>
+        <Variant5ThemeProvider>
         <div className="flex h-screen overflow-hidden bg-background">
           <PrototypeSidebar />
 
@@ -36,6 +40,8 @@ export function ClayShell() {
             <ClayTable />
           </div>
         </div>
+        </Variant5ThemeProvider>
+        </Variant4LabelProvider>
       </Variant3ThemeProvider>
     </InteractionProvider>
   );
