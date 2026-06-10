@@ -15,7 +15,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { ColorListPanel } from "@/components/color-list-panel";
+import { useInteractionVariant } from "@/components/interactions/interaction-context";
 import { cn } from "@/lib/utils";
 import { getColorById, type ColorId, type ColumnColor } from "@/lib/colors";
 
@@ -64,6 +64,8 @@ export function ColumnsPanel({
   onRenameColor,
   children,
 }: ColumnsPanelProps) {
+  const { variant } = useInteractionVariant();
+  const ColumnsPanelColorPicker = variant.ColumnsPanelColorPicker;
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [activeColorColumnId, setActiveColorColumnId] = useState<string | null>(null);
@@ -188,20 +190,18 @@ export function ColumnsPanel({
 
           {/* Color flyout */}
           {activeColumn?.visible && (
-            <div className="border-l border-gray-200">
-              <ColorListPanel
-                showAllColumns
-                colors={colors}
-                selectedColorId={applyColorToAll ? "default" : activeColumn.colorId}
-                onSelectColor={(id) => {
-                  if (applyColorToAll) onSelectAllColors(id);
-                  else onSelectColor(activeColumn.id, id);
-                }}
-                onSelectAllColumns={() => setApplyColorToAll(true)}
-                onRenameColor={onRenameColor}
-                allColumnsActive={applyColorToAll}
-              />
-            </div>
+            <ColumnsPanelColorPicker
+              showAllColumns
+              colors={colors}
+              selectedColorId={applyColorToAll ? "default" : activeColumn.colorId}
+              onSelectColor={(id) => {
+                if (applyColorToAll) onSelectAllColors(id);
+                else onSelectColor(activeColumn.id, id);
+              }}
+              onSelectAllColumns={() => setApplyColorToAll(true)}
+              onRenameColor={onRenameColor}
+              allColumnsActive={applyColorToAll}
+            />
           )}
         </div>
 

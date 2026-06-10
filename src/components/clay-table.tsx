@@ -17,11 +17,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ColorPickerSubmenu } from "@/components/color-picker-submenu";
+import { useInteractionVariant } from "@/components/interactions/interaction-context";
 import { ColumnsPanel, type TableColumn } from "@/components/columns-panel";
 import { cn } from "@/lib/utils";
 import {
@@ -80,6 +78,8 @@ const INITIAL_COLUMNS: TableColumn[] = [
 ];
 
 export function ClayTable() {
+  const { variant } = useInteractionVariant();
+  const ColumnHeaderColorPicker = variant.ColumnHeaderColorPicker;
   const [columns, setColumns] = useState(INITIAL_COLUMNS);
   const [colors, setColors] = useState<ColumnColor[]>(DEFAULT_COLORS);
   const [openMenuColumnId, setOpenMenuColumnId] = useState<string | null>("company");
@@ -192,18 +192,12 @@ export function ClayTable() {
                           Insert 1 column right
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuSub>
-                          <DropdownMenuSubTrigger>
-                            <span className="size-4 rounded-sm border border-black/5 bg-gradient-to-br from-red-200 via-yellow-200 to-blue-200" />
-                            Change color
-                          </DropdownMenuSubTrigger>
-                          <ColorPickerSubmenu
-                            colors={colors}
-                            selectedColorId={column.colorId}
-                            onSelectColor={(id) => setColumnColor(column.id, id)}
-                            onRenameColor={renameColor}
-                          />
-                        </DropdownMenuSub>
+                        <ColumnHeaderColorPicker
+                          colors={colors}
+                          selectedColorId={column.colorId}
+                          onSelectColor={(id) => setColumnColor(column.id, id)}
+                          onRenameColor={renameColor}
+                        />
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>
                           <ArrowDownAZ className="size-4" />
