@@ -1,7 +1,7 @@
 import type { ComponentType } from "react";
 import type { ColorId, ColumnColor } from "@/lib/colors";
 
-export type InteractionVariantId = "1" | "2" | "3" | "4" | "5" | "6" | "7";
+export type InteractionVariantId = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8";
 
 export type ColorPickerBaseProps = {
   colors: ColumnColor[];
@@ -23,7 +23,7 @@ export type InteractionVariant = {
   label: string;
   name: string;
   description: string;
-  preferred?: boolean;
+  favorite?: boolean;
   ColumnHeaderColorPicker: ComponentType<ColumnHeaderColorPickerProps>;
   ColumnsPanelColorPicker: ComponentType<ColumnsPanelColorPickerProps>;
 };
