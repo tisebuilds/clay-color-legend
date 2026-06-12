@@ -8,7 +8,7 @@ export type ColorLabelEntry = {
 export const LABEL_COLOR_IDS: ColorId[] = [
   "red",
   "yellow",
-  "blue",
+  "teal",
   "green",
   "violet",
   "orange",

@@ -23,7 +23,9 @@ function VariantItem({
         onClick={() => onSelect(variant.id)}
         className={cn(
           "flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm leading-relaxed transition-colors",
-          isSelected ? "bg-blue-600 text-white" : "text-gray-700 hover:bg-sidebar-accent"
+          isSelected
+            ? "bg-sidebar-primary text-sidebar-primary-foreground"
+            : "text-gray-700 hover:bg-sidebar-accent"
         )}
         aria-pressed={isSelected}
         aria-label={`Switch to ${variant.label}`}
@@ -31,7 +33,9 @@ function VariantItem({
         <span
           className={cn(
             "flex size-5 shrink-0 items-center justify-center rounded text-xs font-semibold",
-            isSelected ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-600"
+            isSelected
+              ? "bg-white/15 text-sidebar-primary-foreground"
+              : "bg-gray-100 text-gray-600"
           )}
         >
           {variant.id}

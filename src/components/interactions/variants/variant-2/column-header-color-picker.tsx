@@ -26,7 +26,7 @@ export function Variant2ColumnHeaderColorPicker({
           <Paintbrush className="size-4 text-gray-700" />
           Change color
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="w-44 p-0" sideOffset={4}>
+        <DropdownMenuSubContent className="w-44 bg-white p-0" sideOffset={4}>
           <ColorPickerMenu
             colors={colors}
             selectedColorId={selectedColorId}

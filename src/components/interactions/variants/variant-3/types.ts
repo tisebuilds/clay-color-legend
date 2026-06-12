@@ -13,7 +13,7 @@ export type ColorTheme = {
 export const THEME_COLOR_IDS: ColorId[] = [
   "red",
   "yellow",
-  "blue",
+  "teal",
   "green",
   "violet",
   "orange",

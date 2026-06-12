@@ -70,7 +70,7 @@ const SAMPLE_ROWS = [
 const INITIAL_COLUMNS: TableColumn[] = [
   { id: "createdAt", name: "Created At", colorId: "default", visible: false, type: "date" },
   { id: "updatedAt", name: "Updated At", colorId: "default", visible: false, type: "date" },
-  { id: "company", name: "Company Name", colorId: "blue", visible: true, type: "function" },
+  { id: "company", name: "Company Name", colorId: "teal", visible: true, type: "function" },
   { id: "first", name: "First Name", colorId: "default", visible: true, type: "text" },
   { id: "last", name: "Last Name", colorId: "default", visible: true, type: "text" },
   { id: "full", name: "Full Name", colorId: "default", visible: true, type: "text" },
@@ -83,6 +83,7 @@ export function ClayTable() {
   const [columns, setColumns] = useState(INITIAL_COLUMNS);
   const [colors, setColors] = useState<ColumnColor[]>(DEFAULT_COLORS);
   const [openMenuColumnId, setOpenMenuColumnId] = useState<string | null>("company");
+  const [cellActiveColumnId, setCellActiveColumnId] = useState<string | null>(null);
 
   const visibleColumns = useMemo(
     () => columns.filter((col) => col.visible),
@@ -150,27 +151,54 @@ export function ClayTable() {
               {visibleColumns.map((column) => {
                 const color = getColorById(colors, column.colorId);
                 const isMenuOpen = openMenuColumnId === column.id;
+                const isCellActive =
+                  !isMenuOpen && cellActiveColumnId === column.id;
+                const isActive = isMenuOpen;
+                const iconClass = isActive
+                  ? "text-white"
+                  : "text-gray-700";
 
                 return (
                   <th
                     key={column.id}
                     className={cn(
-                      "min-w-[160px] border-b border-r border-gray-200 px-0 py-0 text-left font-semibold",
-                      color.header,
-                      isMenuOpen && "ring-2 ring-inset ring-blue-500"
+                      "min-w-[160px] border-r border-gray-200 px-0 py-0 text-left font-semibold",
+                      isActive && color.table.active,
+                      isCellActive && [
+                        color.table.cellActive,
+                        color.table.cellActiveBorder,
+                      ],
+                      !isActive &&
+                        !isCellActive && [
+                          color.table.default,
+                          "border-b border-gray-200",
+                        ],
+                      isActive && "border-b border-gray-200"
                     )}
                   >
                     <DropdownMenu
                       open={isMenuOpen}
-                      onOpenChange={(open) =>
-                        setOpenMenuColumnId(open ? column.id : null)
-                      }
+                      onOpenChange={(open) => {
+                        if (open) {
+                          setOpenMenuColumnId(column.id);
+                          setCellActiveColumnId(null);
+                        } else {
+                          setOpenMenuColumnId(null);
+                          setCellActiveColumnId(column.id);
+                        }
+                      }}
                     >
                       <DropdownMenuTrigger asChild>
-                        <button className="flex w-full items-center gap-2 px-4 py-3 text-left text-sm leading-relaxed hover:brightness-[0.98]">
-                          <Columns3 className="size-3.5 shrink-0 text-gray-700" />
+                        <button
+                          className={cn(
+                            "flex w-full items-center gap-2 px-4 py-3 text-left text-sm leading-relaxed",
+                            !isActive && color.table.hover,
+                            isActive && color.table.activeForeground
+                          )}
+                        >
+                          <Columns3 className={cn("size-3.5 shrink-0", iconClass)} />
                           <span className="truncate">{column.name}</span>
-                          <ChevronDown className="ml-auto size-3.5 shrink-0 text-gray-700" />
+                          <ChevronDown className={cn("ml-auto size-3.5 shrink-0", iconClass)} />
                         </button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="start" className="w-56">
@@ -195,7 +223,11 @@ export function ClayTable() {
                         <ColumnHeaderColorPicker
                           colors={colors}
                           selectedColorId={column.colorId}
-                          onSelectColor={(id) => setColumnColor(column.id, id)}
+                          onSelectColor={(id) => {
+                            setColumnColor(column.id, id);
+                            setOpenMenuColumnId(null);
+                            setCellActiveColumnId(column.id);
+                          }}
                           onRenameColor={renameColor}
                         />
                         <DropdownMenuSeparator />

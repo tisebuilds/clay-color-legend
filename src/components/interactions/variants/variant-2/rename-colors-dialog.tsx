@@ -11,8 +11,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 import type { ColorId, ColumnColor } from "@/lib/colors";
+import { ColorSwatch } from "./color-swatch";
 
 type RenameColorsDialogProps = {
   open: boolean;
@@ -47,32 +47,26 @@ export function RenameColorsDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="gap-0 p-0 sm:max-w-md" showCloseButton>
+      <DialogContent className="gap-0 bg-white p-0 sm:max-w-md" showCloseButton>
         <DialogHeader className="gap-1 border-b border-gray-200 px-5 py-4">
           <DialogTitle className="text-base font-semibold text-gray-900">
             Rename colors
           </DialogTitle>
           <DialogDescription className="text-sm leading-relaxed text-gray-500">
-            Changes only applies to colors in this workbook
+            Changes only apply to colors in this table.
           </DialogDescription>
         </DialogHeader>
 
         <div className="flex flex-col gap-3 px-5 py-4">
           {colors.map((color) => (
             <div key={color.id} className="flex items-center gap-3">
-              <span
-                className={cn(
-                  "size-4 shrink-0 rounded-sm border border-black/5",
-                  color.swatch,
-                  color.id === "default" && "bg-white"
-                )}
-              />
+              <ColorSwatch color={color} />
               <Input
                 value={drafts[color.id] ?? color.label}
                 onChange={(e) =>
                   setDrafts((prev) => ({ ...prev, [color.id]: e.target.value }))
                 }
-                className="h-8 flex-1 text-sm leading-relaxed"
+                className="h-9 flex-1 rounded-md border-gray-200 text-sm leading-relaxed"
                 aria-label={`Rename ${color.label}`}
               />
             </div>
